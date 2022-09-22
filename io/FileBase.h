@@ -56,12 +56,19 @@ public:
     quint32 ReadString(QString &out, quint32 len = 0) {
         QByteArray arr;
         if (len != 0) {
-            for (int i = 0; i < len; i++) {
-                arr.append(readU8());
+            int i;
+            for (i = 0; i < len; i++) {
+                quint8 cur = readU8();
+                // oops, we hit a null terminator before our length was up
+                if (cur == 0) {
+                    break;
+                }
+
+                arr.append(cur);
             }
 
             out = QString(arr);
-            return len;
+            return i; // return i in case we terminated early
         }
 
         // now we just need to find a null terminated string

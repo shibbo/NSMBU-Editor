@@ -8,6 +8,9 @@ class Level
 public:
     Level(SARCFilesystem *pLevelFile, QString levelName, int levelArea);
 
+
+    QString mTilesets[4];
+
 private:
     SARCFilesystem* mLevelArchive;
     QString mLevelName;

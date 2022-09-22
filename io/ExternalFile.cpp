@@ -3,11 +3,6 @@
 ExternalFile::ExternalFile(FilesystemBase* pFilesystem, QString path) {
     mParent = pFilesystem;
     mFile = new QFile(path);
-
-    if (mFile->exists()) {
-        qDebug("we here");
-    }
-
     mOpenCount = 0;
 }
 

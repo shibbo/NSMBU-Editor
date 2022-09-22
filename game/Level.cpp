@@ -18,4 +18,18 @@ Level::Level(SARCFilesystem *pLevelFile, QString levelName, int levelArea)
         blockOffs[i] = course->readU32();
         blockSizes[i] = course->readU32();
     }
+
+    for (quint32 i = 0; i < 4; i++) {
+        course->seek(blockOffs[0] + (i * 32));
+        QString name;
+        course->ReadString(name, 32);
+
+        if (name.isEmpty()) {
+            mTilesets[i] = "";
+            continue;
+        }
+        else {
+            mTilesets[i] = name;
+        }
+    }
 }
