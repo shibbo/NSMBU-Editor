@@ -31,8 +31,16 @@ set(PROJECT_SOURCES
         game/obj/Background.cpp
         game/obj/Entrance.h
         game/obj/Entrance.cpp
+        game/obj/Location.h
+        game/obj/Location.cpp
+        game/obj/Path.h
+        game/obj/Path.cpp
+        game/obj/PathPoint.h
+        game/obj/PathPoint.cpp
         game/obj/Sprite.h
         game/obj/Sprite.cpp
+        game/obj/Zone.h
+        game/obj/Zone.cpp
         game/obj/ZoneBounds.h
         game/obj/ZoneBounds.cpp
         io/Filesystem.h

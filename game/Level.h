@@ -8,6 +8,7 @@ class Level
 {
 public:
     Level(SARCFilesystem *pLevelFile, QString levelName, int levelArea);
+    ~Level();
 
     enum Blocks : quint32 {
         BLOCK_TILESET       = 0,
@@ -34,6 +35,10 @@ public:
         BLOCK_SIZE_ENTRANCE         = 0x18,
         BLOCK_SIZE_SPRITE           = 0x18,
         BLOCK_SIZE_SPRITES_USED     = 0x4,
+        BLOCK_SIZE_ZONE             = 0x1C,
+        BLOCK_SIZE_LOCATION         = 0xC,
+        BLOCK_SIZE_PATH             = 0xC,
+        BLOCK_SIZE_PATH_NODE        = 0x14
     };
 
     struct AreaSettings {
@@ -61,6 +66,10 @@ public:
     QList<Entrance *> mEntrances;
     QList<Sprite *> mSprites;
     QList<quint16> mLoadedSpritesList;
+    QList<Zone *> mZones;
+    QList<Location *> mLocations;
+    QList<Path *> mPaths;
+    QList<PathPoint *> mPathPoints;
 
 private:
     SARCFilesystem* mLevelArchive;

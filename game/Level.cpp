@@ -82,4 +82,65 @@ Level::Level(SARCFilesystem *pLevelFile, QString levelName, int levelArea)
         mLoadedSpritesList.append(course->readU16());
         course->skip(2);
     }
+
+    /* Zones Block */
+    course->seek(blockOffs[Level::BLOCK_ZONES]);
+    for (quint32 i = 0; i < blockSizes[Level::BLOCK_ZONES] / Level::BLOCK_SIZE_ZONE; i++) {
+        mZones.append(new Zone(course));
+    }
+
+    /* Locations Block */
+    course->seek(blockOffs[Level::BLOCK_LOCATIONS]);
+    for (quint32 i = 0; i < blockSizes[Level::BLOCK_LOCATIONS] / Level::BLOCK_SIZE_LOCATION; i++) {
+        mLocations.append(new Location(course));
+    }
+
+    course->seek(blockOffs[Level::BLOCK_PATHS]);
+    for (quint32 i = 0; i < blockSizes[Level::BLOCK_PATHS] / Level::BLOCK_SIZE_PATH; i++) {
+        mPaths.append(new Path(course));
+    }
+
+    course->seek(blockOffs[Level::BLOCK_PATH_NODES]);
+    for (quint32 i = 0; i < blockSizes[Level::BLOCK_PATH_NODES] / Level::BLOCK_SIZE_PATH_NODE; i++) {
+        mPathPoints.append(new PathPoint(course));
+    }
+
+    course->close();
+    delete course;
+}
+
+Level::~Level() {
+    delete mSettings;
+
+    for (ZoneBounds* bound : mZoneBounds) {
+        delete bound;
+    }
+
+    for (Background* bg : mBackgrounds) {
+        delete bg;
+    }
+
+    for (Entrance* en : mEntrances) {
+        delete en;
+    }
+
+    for (Sprite* spr : mSprites) {
+        delete spr;
+    }
+
+    for (Zone* z : mZones) {
+        delete z;
+    }
+
+    for (Location* loc : mLocations) {
+        delete loc;
+    }
+
+    for (Path* path : mPaths) {
+        delete path;
+    }
+
+    for (PathPoint* pp : mPathPoints) {
+        delete pp;
+    }
 }
