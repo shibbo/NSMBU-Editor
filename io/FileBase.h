@@ -46,6 +46,30 @@ public:
         return qToBigEndian(ret);
     }
 
+    qint8 readS8() {
+        qint8 ret;
+        readData((quint8*)&ret, 1);
+        return ret;
+    }
+
+    qint16 readS16() {
+        qint16 ret;
+        readData((quint8*)&ret, 2);
+        return qToBigEndian(ret);
+    }
+
+    qint32 readS32() {
+        qint32 ret;
+        readData((quint8*)&ret, 4);
+        return qToBigEndian(ret);
+    }
+
+    quint64 readS64() {
+        quint64 ret;
+        readData((quint8*)&ret, 8);
+        return qToBigEndian(ret);
+    }
+
     float readFloat() {
         quint32 bin = readU32();
         float ret;

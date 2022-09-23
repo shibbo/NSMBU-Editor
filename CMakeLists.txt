@@ -24,6 +24,17 @@ set(PROJECT_SOURCES
         game/Game.cpp
         game/Level.h
         game/Level.cpp
+        game/obj/Objects.h
+        game/obj/Object.h
+        game/obj/Object.cpp
+        game/obj/Background.h
+        game/obj/Background.cpp
+        game/obj/Entrance.h
+        game/obj/Entrance.cpp
+        game/obj/Sprite.h
+        game/obj/Sprite.cpp
+        game/obj/ZoneBounds.h
+        game/obj/ZoneBounds.cpp
         io/Filesystem.h
         io/FileBase.h
         io/FileBase.cpp
