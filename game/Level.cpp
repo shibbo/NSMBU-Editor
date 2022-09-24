@@ -105,6 +105,18 @@ Level::Level(SARCFilesystem *pLevelFile, QString levelName, int levelArea)
         mPathPoints.append(new PathPoint(course));
     }
 
+    for (quint32 i = 0; i < 3; i++) {
+        QString layer_file = QString("course/course%1_bgdatL%2.bin").arg(mArea).arg(i);
+
+        if (pLevelFile->fileExists(layer_file)) {
+            FileBase* layer = pLevelFile->openFile(layer_file);
+            layer->open();
+            layer->seek(0);
+            mTiles.insert(i, new Tileset(layer));
+            delete layer;
+        }
+    }
+
     course->close();
     delete course;
 }

@@ -1,8 +1,8 @@
 #include "Entrance.h"
 
 Entrance::Entrance(FileBase *pFile) : Object(pFile) {
-    mXPosition = pFile->readS16();
-    mYPosition = pFile->readS16();
+    mXPosition = util::to64(pFile->readS16());
+    mYPosition = util::to64(pFile->readS16());
     mCameraOffsetX = pFile->readS16();
     mCameraOffsetY = pFile->readS16();
     mID = pFile->readU8();
@@ -20,4 +20,9 @@ Entrance::Entrance(FileBase *pFile) : Object(pFile) {
     mPathNode = pFile->readU8();
     mTransitionType = pFile->readU8();
     _17 = pFile->readU8();
+
+    mWidth = 64;
+    mHeight = 64;
+    mOffsetX = 0;
+    mOffsetY = 0;
 }

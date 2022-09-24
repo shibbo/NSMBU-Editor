@@ -3,7 +3,7 @@
 
 #include "Object.h"
 
-class Path : public Object {
+class Path {
 public:
     Path(FileBase *pFile);
 

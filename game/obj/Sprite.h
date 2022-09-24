@@ -12,9 +12,11 @@ public:
 
     }
 
+    quint8 getID() const {
+        return mSpriteID;
+    }
+
     quint16 mSpriteID;
-    qint16 mXPosition;
-    qint16 mYPosition;
     quint16 mEventID;
     quint64 mSettings;
     quint8 mZoneID;

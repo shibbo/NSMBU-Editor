@@ -12,8 +12,10 @@ public:
 
     }
 
-    qint16 mXPosition;
-    qint16 mYPosition;
+    quint8 getID() const {
+        return mID;
+    }
+
     qint16 mCameraOffsetX;
     qint16 mCameraOffsetY;
     quint8 mID;

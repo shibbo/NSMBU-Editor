@@ -3,6 +3,7 @@
 
 #include "io/SARCFilesystem.h"
 #include "obj/Objects.h"
+#include "Tileset.h"
 
 class Level
 {
@@ -60,6 +61,7 @@ public:
     };
 
     QString mTilesets[4];
+    QMap<quint32, Tileset *> mTiles;
     AreaSettings* mSettings;
     QList<ZoneBounds *> mZoneBounds;
     QList<Background *> mBackgrounds;

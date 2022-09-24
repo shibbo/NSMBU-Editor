@@ -11,10 +11,10 @@ public:
 
     }
 
-    qint16 mXPosition;
-    qint16 mYPosition;
-    quint16 mWidth;
-    quint16 mHeight;
+    quint8 getID() const {
+        return mID;
+    }
+
     quint8 mID;
 };
 

@@ -1,10 +1,10 @@
 #include "Zone.h"
 
 Zone::Zone(FileBase *pFile) : Object(pFile) {
-    mXPosition = pFile->readS16();
-    mYPosition = pFile->readS16();
-    mWidth = pFile->readU16();
-    mHeight = pFile->readU16();
+    mXPosition = util::to64(pFile->readS16());
+    mYPosition = util::to64(pFile->readS16());
+    mWidth = util::to64(pFile->readU16());
+    mHeight = util::to64(pFile->readU16());
     mTheme = pFile->readU16();
     _A = pFile->readU16();
     mID = pFile->readU8();
@@ -22,4 +22,7 @@ Zone::Zone(FileBase *pFile) : Object(pFile) {
     _18 = pFile->readU8();
     _19 = pFile->readU8();
     _1A = pFile->readU16();
+
+    mOffsetX = 0;
+    mOffsetY = 0;
 }

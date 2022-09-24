@@ -1,6 +1,6 @@
 #include "Path.h"
 
-Path::Path(FileBase *pFile) : Object(pFile) {
+Path::Path(FileBase *pFile) {
     mID = pFile->readU8();
     _1 = pFile->readU8();
     mStartNode = pFile->readU16();

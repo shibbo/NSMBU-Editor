@@ -1,6 +1,6 @@
 #include "PathPoint.h"
 
-PathPoint::PathPoint(FileBase *pFile) : Object(pFile) {
+PathPoint::PathPoint(FileBase *pFile) {
     mXPosition = pFile->readS16();
     mYPosition = pFile->readS16();
     mSpeed = pFile->readFloat();

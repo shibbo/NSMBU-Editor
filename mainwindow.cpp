@@ -4,18 +4,24 @@
 #include "game/Game.h"
 #include "game/Level.h"
 
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+MainWindow::MainWindow(WindowBase *parent) : WindowBase(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    setWindowState(Qt::WindowMaximized);
 
     Game* gm = Game::createGame("D:\\Hacking\\WiiU\\NSMBU\\fs\\content\\Common");
 
     if (gm != nullptr) {
         SARCFilesystem* levelArch = gm->getAndDecompLevelArchive("\\course_res_pack\\1-1.szs");
+        mLevel = new Level(new SARCFilesystem(levelArch->openFile("1-1")), "1-1", 1);
+        mLevelView = new LevelView(this, mLevel);
+        ui->levelViewArea->setWidget(mLevelView);
+        mLevelView->setMinimumSize(4096 * 64, 4096 * 64);
+        mLevelView->setMaximumSize(4096 * 64, 4096 * 64);
 
-        Level* lvl = new Level(new SARCFilesystem(levelArch->openFile("1-1")), "1-1", 1);
+        Zone* z = mLevel->mZones.at(0);
+        mLevelView->screenshot(QRect(z->getX(), z->getY(), z->getW(), z->getH()));
+        qDebug("screenshot done");
     }
 
     /*ExternalFilesystem* fs = new ExternalFilesystem("D:\\Hacking\\WiiU\\NSMBU\\fs\\content\\Common");

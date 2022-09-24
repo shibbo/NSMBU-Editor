@@ -24,6 +24,8 @@ set(PROJECT_SOURCES
         game/Game.cpp
         game/Level.h
         game/Level.cpp
+        game/Tileset.h
+        game/Tileset.cpp
         game/obj/Objects.h
         game/obj/Object.h
         game/obj/Object.cpp
@@ -57,6 +59,18 @@ set(PROJECT_SOURCES
         io/SARCFilesystem.cpp
         io/Yaz0File.h
         io/Yaz0File.cpp
+        rend/renders.h
+        rend/EntranceRenderer.h
+        rend/EntranceRenderer.cpp
+        rend/ObjectRenderer.h
+        rend/ObjectRenderer.cpp
+        rend/SpriteRenderer.h
+        rend/SpriteRenderer.cpp
+        ui/LevelView.h
+        ui/LevelView.cpp
+        ui/WindowBase.h
+        util/units.h
+        util/units.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

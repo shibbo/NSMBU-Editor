@@ -11,10 +11,6 @@ public:
 
     }
 
-    qint16 mXPosition;
-    qint16 mYPosition;
-    quint16 mWidth;
-    quint16 mHeight;
     quint16 mTheme;
     quint16 _A;
     quint8 mID;

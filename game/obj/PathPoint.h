@@ -3,7 +3,7 @@
 
 #include "Object.h"
 
-class PathPoint : public Object {
+class PathPoint {
 public:
     PathPoint(FileBase *pFile);
 
