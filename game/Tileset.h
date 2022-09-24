@@ -6,7 +6,7 @@
 class Tileset
 {
 public:
-    Tileset(FileBase *pFile);
+    Tileset(SARCFilesystem *pFile, quint32 layer, quint32 area);
 
     struct Object {
         quint16 mType;
@@ -20,6 +20,8 @@ public:
     };
 
     QList<Object *> mObjects;
+    quint32 mLayer;
+    quint32 mArea;
 };
 
 #endif // TILESET_H

@@ -31,6 +31,7 @@ Level::Level(SARCFilesystem *pLevelFile, QString levelName, int levelArea)
         }
         else {
             mTilesets[i] = name;
+            qDebug() << name;
         }
     }
 
@@ -109,11 +110,7 @@ Level::Level(SARCFilesystem *pLevelFile, QString levelName, int levelArea)
         QString layer_file = QString("course/course%1_bgdatL%2.bin").arg(mArea).arg(i);
 
         if (pLevelFile->fileExists(layer_file)) {
-            FileBase* layer = pLevelFile->openFile(layer_file);
-            layer->open();
-            layer->seek(0);
-            mTiles.insert(i, new Tileset(layer));
-            delete layer;
+            mTiles.insert(i, new Tileset(pLevelFile, i, mArea));
         }
     }
 
