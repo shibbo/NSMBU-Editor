@@ -20,6 +20,8 @@ set(PROJECT_SOURCES
         mainwindow.h
         mainwindow.ui
         common.h
+        fmt/GTX.h
+        fmt/GTX.cpp
         game/Game.h
         game/Game.cpp
         game/Level.h
@@ -69,6 +71,10 @@ set(PROJECT_SOURCES
         ui/LevelView.h
         ui/LevelView.cpp
         ui/WindowBase.h
+        util/ImageUtil.h
+        util/ImageUtil.cpp
+        util/MathUtil.h
+        util/MathUtil.cpp
         util/units.h
         util/units.cpp
 )

@@ -6,8 +6,9 @@ Level::Level(SARCFilesystem *pLevelFile, QString levelName, int levelArea)
     mLevelName = levelName;
     mArea = levelArea;
 
+    SARCFilesystem* course_arch = new SARCFilesystem(pLevelFile->openFile(levelName));
     QString level_file = QString("course/course%1.bin").arg(mArea);
-    FileBase* course = pLevelFile->openFile(level_file);
+    FileBase* course = course_arch->openFile(level_file);
     course->open();
     course->seek(0);
 
@@ -26,12 +27,12 @@ Level::Level(SARCFilesystem *pLevelFile, QString levelName, int levelArea)
         course->ReadString(name, 32);
 
         if (name.isEmpty()) {
-            mTilesets[i] = "";
+            mTilesets[i] = nullptr;
             continue;
         }
         else {
-            mTilesets[i] = name;
-            qDebug() << name;
+            SARCFilesystem* tileset_arch = new SARCFilesystem(pLevelFile->openFile(name));
+            mTilesets[i] = new Tileset(tileset_arch, name);
         }
     }
 
@@ -109,10 +110,33 @@ Level::Level(SARCFilesystem *pLevelFile, QString levelName, int levelArea)
     for (quint32 i = 0; i < 3; i++) {
         QString layer_file = QString("course/course%1_bgdatL%2.bin").arg(mArea).arg(i);
 
-        if (pLevelFile->fileExists(layer_file)) {
-            mTiles.insert(i, new Tileset(pLevelFile, i, mArea));
+        if (course_arch->fileExists(layer_file)) {
+            FileBase* layerFile = course_arch->openFile(layer_file);
+            layerFile->open();
+            layerFile->seek(0);
+
+
+            for (;;) {
+                quint16 type = layerFile->readU16();
+
+                if (type == 0xFFFF) {
+                    break;
+                }
+
+                quint16 x = layerFile->readU16();
+                quint16 y = layerFile->readU16();
+                quint16 w = layerFile->readU16();
+                quint16 h = layerFile->readU16();
+                quint8 typeOvr = layerFile->readU8();
+                layerFile->skip(5);
+                mObjects[i].append(new BgDatObject(type, x, y, w, h, typeOvr, i));
+            }
+
+            layerFile->close();
         }
     }
+
+
 
     course->close();
     delete course;
@@ -153,3 +177,4 @@ Level::~Level() {
         delete pp;
     }
 }
+

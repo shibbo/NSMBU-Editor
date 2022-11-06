@@ -4,6 +4,7 @@
 #include "io/SARCFilesystem.h"
 #include "obj/Objects.h"
 #include "Tileset.h"
+#include "fmt/GTX.h"
 
 class Level
 {
@@ -60,8 +61,10 @@ public:
 
     };
 
-    QString mTilesets[4];
-    QMap<quint32, Tileset *> mTiles;
+    //QString mTilesets[4];
+    //QMap<QString, GTX *> mTilesetImages;
+    //QMap<quint32, Tileset *> mTiles;
+    Tileset* mTilesets[4];
     AreaSettings* mSettings;
     QList<ZoneBounds *> mZoneBounds;
     QList<Background *> mBackgrounds;
@@ -72,6 +75,7 @@ public:
     QList<Location *> mLocations;
     QList<Path *> mPaths;
     QList<PathPoint *> mPathPoints;
+    QMap<quint8, QList<BgDatObject *>> mObjects;
 
 private:
     SARCFilesystem* mLevelArchive;

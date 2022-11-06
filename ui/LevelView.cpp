@@ -37,14 +37,15 @@ void LevelView::paint(QPainter& painter, QRect rect, float zoomLvl, bool selecti
     painter.fillRect(mDrawRect, mBackgroundColor);
 
     for (quint32 i = 0; i < 3; i++) {
-        if (mLevel->mTiles.contains(i)) {
-            for (Tileset::Object* obj : mLevel->mTiles[i]->mObjects) {
+        QList<BgDatObject *> objs = mLevel->mObjects[i];
+
+        if (objs.count() != 0) {
+            for (BgDatObject* obj : objs) {
                 QRect location_rect(obj->mXPosition * 64, obj->mYPosition * 64, obj->mWidth * 64, obj->mHeight * 64);
                 painter.fillRect(location_rect, QBrush(QColor(245, 142, 39, 50)));
                 painter.setPen(QColor(0, 0,0));
                 painter.drawRect(location_rect);
             }
-
         }
     }
 
@@ -101,13 +102,13 @@ void LevelView::paint(QPainter& painter, QRect rect, float zoomLvl, bool selecti
         }
         else if (x % 256 == 0)
         {
-            if (mZoom  < 0.3) continue;
+            if (mZoom < 0.3) continue;
             painter.setPen(QPen(QColor(255,255,255,75), 1, Qt::DashLine));
             painter.drawLine(x, starty, x, endy);
         }
         else
         {
-            if (mZoom  < 0.5) continue;
+            if (mZoom < 0.5) continue;
             painter.setPen(QPen(QColor(255,255,255,75), 1, Qt::DotLine));
             painter.drawLine(x, starty, x, endy);
         }
@@ -124,13 +125,13 @@ void LevelView::paint(QPainter& painter, QRect rect, float zoomLvl, bool selecti
         }
         else if (y % 256 == 0)
         {
-            if (mZoom  < 0.3) continue;
+            if (mZoom < 0.3) continue;
             painter.setPen(QPen(QColor(255,255,255,75), 1, Qt::DashLine));
             painter.drawLine(startx, y, endx, y);
         }
         else
         {
-            if (mZoom  < 0.5) continue;
+            if (mZoom < 0.5) continue;
             painter.setPen(QPen(QColor(255,255,255,75), 1, Qt::DotLine));
             painter.drawLine(startx, y, endx, y);
         }

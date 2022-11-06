@@ -13,7 +13,8 @@ MainWindow::MainWindow(WindowBase *parent) : WindowBase(parent), ui(new Ui::Main
 
     if (gm != nullptr) {
         SARCFilesystem* levelArch = gm->getAndDecompLevelArchive("\\course_res_pack\\1-1.szs");
-        mLevel = new Level(new SARCFilesystem(levelArch->openFile("1-1")), "1-1", 1);
+        //mLevel = new Level(new SARCFilesystem(levelArch->openFile("1-1")), "1-1", 1);
+        mLevel = new Level(levelArch, "1-1", 1);
         mLevelView = new LevelView(this, mLevel);
         ui->levelViewArea->setWidget(mLevelView);
         mLevelView->setMinimumSize(4096 * 64, 4096 * 64);
